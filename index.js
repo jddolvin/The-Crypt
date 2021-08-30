@@ -1,4 +1,5 @@
-const spacer = require("./myModules/formatter");
+const formatter = require("./myModules/formatter");
+const Place = require("./constructors/places");
 
 let player1 = {
   name: "Justin",
@@ -30,9 +31,9 @@ const getPlayerPlace = (player) => {
 
 // Define a function to build a string for the display of player items
 const getPlayerItems = (player) => {
-  let itemsString = "Items:" + spacer.newLine();
+  let itemsString = "Items:" + formatter.newLine();
   player.items.forEach((item) => {
-    itemsString += "  - " + item + spacer.newLine();
+    itemsString += "  - " + item + formatter.newLine();
   });
 
   return itemsString;
@@ -45,15 +46,15 @@ const getPlayerInfo = (player, borderCharacter) => {
   let health = getPlayerHealth(player);
   let longest = Math.max(place.length, health.length) + 4;
 
-  info = spacer.box(getPlayerName(player), longest, borderCharacter);
-  info += spacer.wrap(place, longest, borderCharacter);
-  info += spacer.newLine() + spacer.wrap(health, longest, borderCharacter);
-  info += spacer.newLine() + spacer.line(longest, borderCharacter);
-  info += spacer.newLine();
+  info = formatter.box(getPlayerName(player), longest, borderCharacter);
+  info += formatter.wrap(place, longest, borderCharacter);
+  info += formatter.newLine() + formatter.wrap(health, longest, borderCharacter);
+  info += formatter.newLine() + formatter.line(longest, borderCharacter);
+  info += formatter.newLine();
   info += " " + getPlayerItems(player);
-  info += spacer.newLine();
-  info += spacer.line(longest, borderCharacter);
-  info += spacer.newLine();
+  info += formatter.newLine();
+  info += formatter.line(longest, borderCharacter);
+  info += formatter.newLine();
 
   return info;
 };
@@ -62,4 +63,23 @@ const showPlayerInfo = (player, character) => {
   console.log(getPlayerInfo(player, character));
 };
 
-showPlayerInfo(player1, "+");
+const library = new Place(
+    "The Old Library",
+    "You are in a library. Dusty books line the walls."
+);
+
+const kitchen = new Place(
+    "The Kitchen",
+    "You are in the kitchen. There is a disturbing smell."
+);
+
+const greatHall = new Place(
+    "The Great Hall",
+    "You are in a large hall. It is strangely empty."
+);
+
+library.addItem("a rusty key");
+library.addExit(kitchen);
+library.addExit(greatHall);
+
+library.showInfo();
