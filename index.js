@@ -1,15 +1,14 @@
-let player1;
-let player2;
+const spacer = require("./myModules/formatter");
 
-player1 = {
+let player1 = {
   name: "Justin",
   health: 50,
   place: "The Dungeon of Doom",
 };
 
-player2 = {
+let player2 = {
   name: "Donny",
-  health: 40,
+  health: 50,
   place: "The Old Library",
 };
 
@@ -28,22 +27,22 @@ const getPlayerPlace = (player) => {
   return player.name + " is in " + player.place;
 };
 
-// Border for player info builder
-const getBorder = () => {
-  return "********************************";
+const getPlayerInfo = (player, borderCharacter) => {
+  // Initialize empty string for player info
+  let playerInfo = "";
+  let place = getPlayerPlace(player);
+  let health = getPlayerHealth(player);
+  let longest = Math.max(place.length, health.length) + 4;
+
+  playerInfo = spacer.box(getPlayerName(player), longest, borderCharacter);
+  playerInfo += spacer.wrap(place, longest, borderCharacter);
+  playerInfo +=
+    spacer.newLine() + spacer.wrap(health, longest, borderCharacter);
+  playerInfo += spacer.newLine() + spacer.line(longest, borderCharacter);
+  playerInfo += spacer.newLine();
+
+  return playerInfo;
 };
 
-const getPlayerInfo = (player) => {
-    // Initialize empty string for player info
-    let playerInfo = "";
-    playerInfo = "\n" + getPlayerName(player);
-    playerInfo += "\n" + getBorder();
-    playerInfo += "\n" + getPlayerPlace(player);
-    playerInfo += "\n" + getPlayerHealth(player);
-    playerInfo += "\n" + getBorder();
-    playerInfo += "\n";
-
-    return playerInfo;
-}
-
-console.log(getPlayerInfo(player2));
+console.log(getPlayerInfo(player1, "="));
+console.log(getPlayerInfo(player2, "="));
