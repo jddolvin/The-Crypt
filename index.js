@@ -27,31 +27,6 @@ const getPlayerItems = (player) => {
   return itemsString;
 };
 
-const getPlayerInfo = (player, borderCharacter) => {
-  // Initialize empty string for player info
-  let info = "";
-  let place = getPlayerPlace(player);
-  let health = getPlayerHealth(player);
-  let longest = Math.max(place.length, health.length) + 4;
-
-  info = formatter.box(getPlayerName(player), longest, borderCharacter);
-  info += formatter.wrap(place, longest, borderCharacter);
-  info +=
-    formatter.newLine() + formatter.wrap(health, longest, borderCharacter);
-  info += formatter.newLine() + formatter.line(longest, borderCharacter);
-  info += formatter.newLine();
-  info += " " + getPlayerItems(player);
-  info += formatter.newLine();
-  info += formatter.line(longest, borderCharacter);
-  info += formatter.newLine();
-
-  return info;
-};
-
-const showPlayerInfo = (player, character) => {
-  console.log(getPlayerInfo(player, character));
-};
-
 const library = new Place(
   "The Old Library",
   "You are in a library. Dusty books line the walls."
