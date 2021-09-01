@@ -17,6 +17,11 @@ const greatHall = new Place(
   "You are in a large hall. It is strangely empty."
 );
 
+const diningRoom = new Place(
+  "The Dining Room",
+  "You are in an enormous dining room. The grandfather clock ticks away."
+)
+
 let player1 = new Player("Justin", 50);
 player1.place = library;
 player1.addItem("a rusty key");
