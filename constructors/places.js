@@ -7,7 +7,7 @@ class Place {
     this.title = title;
     this.description = description;
     this.items = [];
-    this.exits = [];
+    this.exits = {};
 
     this.getInfo = () => {
       let infoString = this.getTitle();
@@ -32,10 +32,11 @@ class Place {
       let exitsString = "Exits from " + this.title;
       exitsString += ":" + newLine;
 
-      this.exits.forEach((exit) => {
-        exitsString += "  - " + exit.title;
+      Object.keys(this.exits).forEach((key) => {
+        exitsString += "  - " + key;
         exitsString += newLine;
       });
+
       return exitsString;
     };
 
@@ -51,10 +52,9 @@ class Place {
       this.items.push(item);
     };
 
-    this.addExit = (exit) => {
-      this.exits.push(exit);
+    this.addExit = (direction, exit) => {
+      this.exits[direction] = exit;
     };
-    
   }
 }
 
